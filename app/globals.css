@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --app-bg: #f6f7fb;
+  --app-fg: #111827;
+  --muted: #6b7280;
+  --card-bg: rgba(255, 255, 255, 0.84);
+  --input-bg: #ffffff;
+}
+
+.dark,
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --app-bg: #07080c;
+  --app-fg: #f8fafc;
+  --muted: #a1a1aa;
+  --card-bg: rgba(255, 255, 255, 0.04);
+  --input-bg: rgba(0, 0, 0, 0.2);
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--app-bg); color: var(--app-fg); @apply antialiased; }
+.glass { @apply border border-white/10 shadow-xl shadow-black/5 backdrop-blur-xl; background: var(--card-bg); }
+.premium-card { @apply rounded-3xl border border-zinc-200 p-5 shadow-xl shadow-slate-200/50 transition hover:-translate-y-0.5 hover:shadow-2xl dark:border-white/10 dark:shadow-black/20; background: var(--card-bg); }
+.premium-input { @apply rounded-2xl border border-zinc-200 px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 dark:border-white/10; background: var(--input-bg); }
+.premium-button { @apply inline-flex min-h-11 items-center justify-center rounded-2xl bg-blue-600 px-4 py-3 text-center text-sm font-medium leading-snug text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-500; overflow-wrap: anywhere; }
+html[data-order-view="list"] .order-cards { display: none; }
+html[data-order-view="cards"] .order-list { display: none; }
+html:not([data-order-view]) .order-list { display: none; }
+html[data-sidebar="collapsed"] main { display: block !important; grid-template-columns: minmax(0, 1fr) !important; }
+html[data-sidebar="collapsed"] main > section { grid-column: auto !important; width: 100%; min-height: 100vh; }
+html[data-sidebar="collapsed"] .class-sidebar { width: 0 !important; min-width: 0 !important; padding-left: 0 !important; padding-right: 0 !important; }
+@media (min-width: 769px) {
+  html[data-sidebar="collapsed"] .class-sidebar { position: fixed !important; inset: 0 auto 0 0; transform: translateX(-100%) !important; opacity: 0; pointer-events: none; }
+}
+* { min-width: 0; }
+button, a { overflow-wrap: anywhere; }
+@media (max-width: 768px) {
+  .class-sidebar { position: fixed; inset: 0 auto 0 0; width: min(82vw, 320px); }
+  html[data-sidebar="collapsed"] .class-sidebar { transform: translateX(-100%); }
+}
